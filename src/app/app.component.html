@@ -1,20 +1,173 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!
+    Registration
   </h1>
+
+  <form (submit)="onSubmit()"
+  #formData='ngForm'>
+    <div class='box'>
+      <div style='text-align:left'>
+        <h2>Account Information</h2>
+      </div>
+      <div class='inputs'>
+        *First Name: 
+        <input
+          type="text" 
+          name="firstName" 
+          required 
+          minlength="4" 
+          maxlength="24"
+          [(ngModel)]="user.firstName"
+          #firstName='ngModel'
+        />
+        <span *ngIf=(firstName.errors)> {{ firstName.errors | json }} </span>
+        <!-- <span *ngIf=(firstName.valid)> {{ firstName.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *Last Name: 
+        <input
+          type="text" 
+          name="lastName" 
+          required 
+          minlength="4" 
+          maxlength="24"
+          [(ngModel)]="user.lastName"
+          #lastName='ngModel'
+        />
+        <span *ngIf=(lastName.errors)> {{ lastName.errors | json }} </span>
+        <!-- <span *ngIf=(lastName.valid)> {{ lastName.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *Email: 
+        <input
+          type="text" 
+          name="email" 
+          required 
+          minlength="4" 
+          pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+          maxlength="24"
+          [(ngModel)]="user.email"
+          #email='ngModel'
+        />
+        <span *ngIf=(email.errors)> {{ email.errors | json }} </span>
+        <!-- <span *ngIf=(email.valid)> {{ email.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *Password: 
+        <input
+          type="text" 
+          name="password" 
+          required 
+          minlength="5" 
+          maxlength="24"
+          [(ngModel)]="user.password"
+          #password='ngModel'
+        />
+        <span *ngIf=(password.errors)> {{ password.errors | json }} </span>
+        <!-- <span *ngIf=(password.valid)> {{ password.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *Password Confirmation: 
+        <input
+          type="text" 
+          name="passwordConfirm" 
+          required
+          [(ngModel)]="user.passwordConfirm"
+          #passwordConfirm='ngModel'
+        />
+        <span *ngIf='user.password !== user.passwordConfirm'> Passwords dont match </span>
+        <span *ngIf=(passwordConfirm.errors)> {{ passwordConfirm.errors | json }} </span>
+        <!-- <span *ngIf=(passwordConfirm.valid)> {{ passwordConfirm.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *Street Address: 
+        <input
+          type="text" 
+          name="streetAddress"
+          required
+          minlength="4" 
+          [(ngModel)]="user.streetAddress"
+          #streetAddress='ngModel'
+        />
+        <span *ngIf=(streetAddress.errors)> {{ streetAddress.errors | json }} </span>
+        <!-- <span *ngIf=(streetAddress.valid)> {{ streetAddress.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        Unit/Apt: 
+        <input
+          type="text" 
+          name="unit_apt" 
+          [(ngModel)]="user.unit_apt"
+          #streetAddress='ngModel'
+        />
+      </div>
+      <div class='inputs'>
+        *City: 
+        <input
+          type="text" 
+          name="city" 
+          required 
+          minlength="4" 
+          [(ngModel)]="user.city"
+          #city='ngModel'
+        />
+        <span *ngIf=(city.errors)> {{ city.errors | json }} </span>
+        <!-- <span *ngIf=(city.valid)> {{ city.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *State: 
+        <select
+          type="text" 
+          name="state" 
+          required 
+          [(ngModel)]="user.state"
+          #state='ngModel'>
+          <option selected="selected" value="California">CA</option>
+          <option value="Alaska">AL</option>
+          <option value="NewYork">NY</option>
+          <option value="Texas">TX</option>
+        </select>
+        <span *ngIf=(state.errors)> {{ state.errors | json }} </span>
+        <!-- <span *ngIf=(state.valid)> {{ state.valid | json }} </span> -->
+      </div>
+      <div class='inputs'>
+        *I'm feeling lucky: 
+        <input
+          type="radio" 
+          name="lucky"
+          value=true
+          checked="checked"
+          required 
+          [(ngModel)]="user.lucky"
+          #lucky='ngModel'
+        />Yes
+        <input
+        type="radio" 
+        name="lucky"
+        value=false
+        required 
+        [(ngModel)]="user.lucky"
+        #lucky='ngModel'
+      />No
+      <span *ngIf=(lucky.errors)> {{ lucky.errors | json }} </span>
+      <!-- <span *ngIf=(lucky.valid)> {{ lucky.valid | json }} </span> -->
+      </div>
+    </div>
+    <!-- {{ formData.errors | json }}
+    {{ formData.valid | json }} -->
+    <div class='box' *ngIf=(formData.valid) ng-model='me'>
+      <input ng-disabled='me' type="submit" value='register'>
+    </div>
+  </form>
+  
+
+
+
+
+
+
+
+
   <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
